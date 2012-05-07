@@ -67,10 +67,11 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = 'https://s3.amazonaws.com/django-blog/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    os.path.join(SITE_ROOT, '..', 'static'),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -84,6 +85,12 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+# Add our S3 Storage information
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_ACCESS_KEY_ID = os.environ['S3_KEY']
+AWS_SECRET_ACCESS_KEY = os.environ['S3_SECRET_KEY']
+AWS_STORAGE_BUCKET_NAME = 'django-blog'
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'l&amp;=#ya7iy8a^*0ftt^kgl9f^0)6%2mov2ho^y2er%ccr^$*+hg'
 
@@ -92,6 +99,12 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.messages.context_processors.messages',
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.static',
 )
 
 MIDDLEWARE_CLASSES = (
