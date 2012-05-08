@@ -10,6 +10,7 @@ class Author(models.Model):
 class Post(models.Model):
     body = models.TextField()
     title = models.CharField(max_length=50)
+    display_title = models.CharField(max_length=50)
     author = models.ForeignKey(Author)
     publication_date = models.DateTimeField(auto_now_add=True)
 
