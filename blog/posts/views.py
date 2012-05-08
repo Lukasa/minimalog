@@ -27,3 +27,26 @@ def post(request, post_title):
 
     return HttpResponse(t.render(context))
 
+def archive(request):
+    # Here we want to show all of the post titles, sorted by date.
+    posts = Post.objects.all().order_by("publication_date")
+    data_for_output = []
+
+    title = u"Lukasa | Archive"
+
+    # Here we only need the titles and the urls.
+    for post in posts:
+        content = post.body.split('\n\n')
+        title = content[0].strip('# ')
+        url = u'/blog/' + post.title + u'/'
+        data_for_output.append( (title, url) )
+
+    context = RequestContext(request,
+              {'PAGE_TITLE': title,
+               'PAGE_DESCRIPTION': u'A list of blog posts.',
+               'PAGE_AUTHOR': u'Cory Benfield',
+               'posts': data_for_output})
+    t = loader.get_template('archive.html')
+
+    return HttpResponse(t.render(context))
+

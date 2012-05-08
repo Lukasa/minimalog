@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'posts.views.home', name='home'),
     url(r'^blog/(\w+)/$', 'posts.views.post', name='blogpost'),
+    url(r'^archive/$', 'posts.views.archive', name='archive'),
     # url(r'^blog/', include('blog.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
