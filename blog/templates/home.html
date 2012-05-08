@@ -2,5 +2,10 @@
 {% load markup %}
 
 {% block content %}
-<p>The view of the Earth from the Moon fascinated me—a small disk, 240,000 miles away. It was hard to think that that little thing held so many problems, so many frustrations. Raging nationalistic interests, famines, wars, pestilence don't show from that distance.</p>
+    {% for post_title, first_para, post_url in posts %}
+        <h2><a href={{ post_url }}>{{ post_title }}</a></h2>
+        {{ first_para|markdown }}
+        <p><a href={{ post_url }}>Read more...</a></p>
+        <hr />
+    {% endfor %}
 {% endblock %}

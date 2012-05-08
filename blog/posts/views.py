@@ -3,27 +3,56 @@ from django.template import RequestContext, loader
 from posts.models import Post
 from django.http import Http404, HttpResponse
 
-def home(request):
-    return render_to_response('home.html', context_instance=RequestContext(request))
-
 def post(request, post_title):
-
     # Try to find the post that corresponds to the title.
     try:
         found_post = Post.objects.get(title = post_title)
     except Post.DoesNotExist:
         raise Http404
 
-    title = u'Lukasa | ' + found_post.display_title
+    post_content = found_post.body.split('\n\n')
+    post_title = post_content[0].strip('# ')
+    post_remainder = u'\n\n'.join(post_content[1:])
+    post_url = u'/blog/' + found_post.title + u'/'
+
+    title = u'Lukasa | ' + post_title
 
     # Got to build up the relevant contexts.
     context = RequestContext(request,
             {'PAGE_TITLE': title,
              'PAGE_DESCRIPTION': None,
              'PAGE_AUTHOR': found_post.author.name,
-             'BODY': found_post.body})
+             'post_title': post_title,
+             'post_body': post_remainder,
+             'post_url': post_url})
 
     t = loader.get_template('post.html')
+
+    return HttpResponse(t.render(context))
+
+def home(request):
+    # Here we want to show the most recent posts.
+    posts = Post.objects.all().order_by("publication_date")[:5]
+    data_for_output = []
+
+    title = u"Lukasa's BLOGTIEM"
+
+    # We don't want all of the blog post, just the title and first paragraph.
+    # TODO: Should this be more resilient?
+    for post in posts:
+        content = post.body.split('\n\n')
+        title = content[0].strip('# ')
+        url = u'/blog/' + post.title + u'/'
+        data_for_output.append( (title, content[1], url) )
+
+    # Build up the context again.
+    context = RequestContext(request,
+              {'PAGE_TITLE': title,
+               'PAGE_DESCRIPTION': u'A blog of technology, programming and life.',
+               'PAGE_AUTHOR': u'Cory Benfield',
+               'posts': data_for_output})
+
+    t = loader.get_template('home.html')
 
     return HttpResponse(t.render(context))
 

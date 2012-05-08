@@ -2,5 +2,6 @@
 {% load markup %}
 
 {% block content %}
-    {{ BODY|markdown }}
+    <h2><a href={{ post_url }}>{{ post_title }}</a></h2>
+    {{ post_body|markdown }}
 {% endblock %}
