@@ -21,7 +21,7 @@ def post(request, post_title):
     context = RequestContext(request,
             {'PAGE_TITLE': title,
              'PAGE_DESCRIPTION': None,
-             'PAGE_AUTHOR': found_post.author.name,
+             'PAGE_AUTHOR': u'Cory Benfield',
              'post_title': post_title,
              'post_body': post_remainder,
              'post_url': post_url})
