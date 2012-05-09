@@ -4,4 +4,14 @@
 {% block content %}
     <h2><a href={{ post_url }}>{{ post_title }}</a></h2>
     {{ post_body|markdown }}
+
+    <div class="comments">
+        <h4>Comments</h4>
+        {% for comment in comments %}
+            <div class="comment-body">
+            <p>{{ comment.text }}</p>
+            <p><span style="margin-left:20px;">{{ comment.author }} on {{ comment.date }}</span></p>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
