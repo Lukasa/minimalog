@@ -11,7 +11,7 @@
             {% for comment in comments %}
                 <div class="comment-body">
                 <p>{{ comment.text|escape }}</p>
-                <p><span style="margin-left:20px;">{{ comment.author|escape }} on {{ comment.date }}</span></p>
+                <p><span style="margin-left:20px;">{{ comment.author|escape }} at {{ comment.date|date:"g:i A" }} on {{ comment.date|date:"l, F" }} the {{ comment.date|date:"jS, Y" }}</span></p>
                 </div>
             {% endfor %}
         {% else %}
