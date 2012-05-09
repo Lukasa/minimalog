@@ -9,8 +9,8 @@
         <h4>Comments</h4>
         {% for comment in comments %}
             <div class="comment-body">
-            <p>{{ comment.text }}</p>
-            <p><span style="margin-left:20px;">{{ comment.author }} on {{ comment.date }}</span></p>
+            <p>{{ comment.text|escape }}</p>
+            <p><span style="margin-left:20px;">{{ comment.author|escape }} on {{ comment.date }}</span></p>
             </div>
         {% endfor %}
     </div>
