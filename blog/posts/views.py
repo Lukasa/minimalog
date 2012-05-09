@@ -37,7 +37,7 @@ def post(request, post_title):
 
 def home(request):
     # Here we want to show the most recent posts.
-    posts = Post.objects.all().order_by("publication_date")[:5]
+    posts = Post.objects.all().order_by("-publication_date")[:5]
     data_for_output = []
 
     title = u"Lukasa's BLOGTIEM"
