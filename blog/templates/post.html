@@ -6,12 +6,16 @@
     {{ post_body|markdown }}
 
     <div class="comments">
-        <h4>Comments</h4>
-        {% for comment in comments %}
-            <div class="comment-body">
-            <p>{{ comment.text|escape }}</p>
-            <p><span style="margin-left:20px;">{{ comment.author|escape }} on {{ comment.date }}</span></p>
-            </div>
-        {% endfor %}
+        {% if comments %}
+            <h4>{{ comments|length }} Comments</h4>
+            {% for comment in comments %}
+                <div class="comment-body">
+                <p>{{ comment.text|escape }}</p>
+                <p><span style="margin-left:20px;">{{ comment.author|escape }} on {{ comment.date }}</span></p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h4>No Comments. Be the first!</h4>
+        {% endif %}
     </div>
 {% endblock %}
