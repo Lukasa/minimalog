@@ -3,12 +3,21 @@ from django.template import RequestContext, loader
 from posts.models import Post, Comment
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from forms import CommentForm
+from helpers import get_post_url
 
-def post(request, post_title):
+def post(request, post_year, post_month, post_title):
     # Try to find the post that corresponds to the title.
-    try:
-        found_post = Post.objects.get(title = post_title)
-    except Post.DoesNotExist:
+    possibilities = Post.objects.filter(
+                        publication_date__year = post_year
+                    ).filter(
+                        publication_date__month = post_month
+                    ).filter(
+                        title = post_title
+                    )
+
+    if len(possibilities) == 1:
+        found_post = possibilities[0]
+    else:
         raise Http404
 
     # If this is hit by a POST, someone is making a comment.
@@ -37,7 +46,7 @@ def post(request, post_title):
     post_content = found_post.body.split('\n\n')
     post_title = post_content[0].strip('# ')
     post_remainder = u'\n\n'.join(post_content[1:])
-    post_url = u'/blog/' + found_post.title + u'/'
+    post_url = get_post_url(found_post)
     title = u'Lukasa | ' + post_title
 
     # Get all the comments associated with the post.
@@ -70,7 +79,7 @@ def home(request):
     for post in posts:
         content = post.body.split('\n\n')
         title = content[0].strip('# ')
-        url = u'/blog/' + post.title + u'/'
+        url = get_post_url(post)
         data_for_output.append( (title, content[1], url) )
 
     # Build up the context again.
@@ -95,7 +104,7 @@ def archive(request):
     for post in posts:
         content = post.body.split('\n\n')
         title = content[0].strip('# ')
-        url = u'/blog/' + post.title + u'/'
+        url = get_post_url(post)
         data_for_output.append( (title, url) )
 
     context = RequestContext(request,

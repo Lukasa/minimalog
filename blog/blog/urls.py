@@ -7,7 +7,7 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'posts.views.home', name='home'),
-    url(r'^blog/(\w+)/$', 'posts.views.post', name='blogpost'),
+    url(r'^blog/(\d{4})/(\d{2})/(\w+)/$', 'posts.views.post', name='blogpost'),
     url(r'^archive/$', 'posts.views.archive', name='archive'),
     # url(r'^blog/', include('blog.foo.urls')),
 
