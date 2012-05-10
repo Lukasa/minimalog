@@ -1,7 +1,8 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext, loader
 from posts.models import Post, Comment
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect
+from forms import CommentForm
 
 def post(request, post_title):
     # Try to find the post that corresponds to the title.
@@ -9,6 +10,27 @@ def post(request, post_title):
         found_post = Post.objects.get(title = post_title)
     except Post.DoesNotExist:
         raise Http404
+
+    # If this is hit by a POST, someone is making a comment.
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+
+        # Check form validity. If not valid, we'll drop through and render the
+        # page.
+        if form.is_valid():
+            # Hooray, form is filled out ok! Create a new comment.
+            body_text = form.cleaned_data['text']
+            comment_author = form.cleaned_data['name']
+
+            comment = Comment(text   = body_text,
+                              author = comment_author,
+                              post   = found_post)
+            comment.save()
+            # At this point, we're happy to drop through and render the page.
+            return HttpResponseRedirect(request.path)
+    else:
+        # Return an empty form and render the page.
+        form = CommentForm()
 
     # Get the information in the form we want. This should be considered
     # subject to change.
@@ -29,7 +51,8 @@ def post(request, post_title):
              'post_title': post_title,
              'post_body': post_remainder,
              'post_url': post_url,
-             'comments': comments})
+             'comments': comments,
+             'form': form})
 
     t = loader.get_template('post.html')
 

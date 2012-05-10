@@ -18,4 +18,16 @@
             <h4>No Comments. Be the first!</h4>
         {% endif %}
     </div>
+
+    <strong>New Comment:</strong>
+    <form action={{ post_url }} method="post">{% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form.name.errors }}
+        <label for="id_name">Display Name:</label>
+        {{ form.name }}
+        {{ form.text.errors }}
+        <label for="id_text">Comment:</label>
+        {{ form.text }}
+        <button type="submit">Submit Comment</button>
+    </form>
 {% endblock %}
