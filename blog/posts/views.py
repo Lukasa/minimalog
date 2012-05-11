@@ -116,3 +116,18 @@ def archive(request):
 
     return HttpResponse(t.render(context))
 
+def about(request):
+    # Render the About Me page.
+
+    page_title = u'Lukasa | About Me'
+    page_description = u'A brief description of me.'
+    page_author = u'Cory Benfield'
+
+    context = RequestContext(request,
+              {'PAGE_TITLE': page_title,
+               'PAGE_DESCRIPTION': page_description,
+               'PAGE_AUTHOR': page_author})
+    t = loader.get_template('about.html')
+
+    return HttpResponse(t.render(context))
+
