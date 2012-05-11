@@ -48,9 +48,14 @@ def post(request, post_year, post_month, post_title):
     post_remainder = u'\n\n'.join(post_content[1:])
     post_url = get_post_url(found_post)
     page_title = u'Lukasa | ' + post_title
+    comments_enabled = found_post.enable_comments
 
-    # Get all the comments associated with the post.
-    comments = Comment.objects.filter(post = found_post).order_by("date")
+    # Get all the comments associated with the post. Only bother with this if
+    # the comments are enabled on the post.
+    if comments_enabled:
+        comments = Comment.objects.filter(post = found_post).order_by("date")
+    else:
+        comments = []
 
     # Got to build up the relevant contexts.
     context = RequestContext(request,
@@ -60,6 +65,7 @@ def post(request, post_year, post_month, post_title):
              'post_title': post_title,
              'post_body': post_remainder,
              'post_url': post_url,
+             'comments_enabled': comments_enabled,
              'comments': comments,
              'form': form})
 
