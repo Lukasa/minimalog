@@ -101,7 +101,7 @@ def home(request):
 
 def archive(request):
     # Here we want to show all of the post titles, sorted by date.
-    posts = Post.objects.all().order_by("publication_date")
+    posts = Post.objects.all().order_by("-publication_date")
     data_for_output = []
 
     page_title = u"Lukasa | Archive"
