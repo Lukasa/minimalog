@@ -3,6 +3,7 @@
 
 {% block content %}
     <h2><a href={{ post_url }}>{{ post_title }}</a></h2>
+    <p><small>Posted on {{ publication_date|date:"d/m/Y"}}.</small></p>
     {{ post_body|markdown }}
 
     {% if comments_enabled %}

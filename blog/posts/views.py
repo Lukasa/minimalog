@@ -67,6 +67,7 @@ def post(request, post_year, post_month, post_title):
              'post_url': post_url,
              'comments_enabled': comments_enabled,
              'comments': comments,
+             'publication_date': found_post.publication_date,
              'form': form})
 
     t = loader.get_template('post.html')
