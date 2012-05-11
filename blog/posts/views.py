@@ -3,7 +3,7 @@ from django.template import RequestContext, loader
 from posts.models import Post, Comment
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from forms import CommentForm
-from helpers import get_post_url
+from helpers import get_post_url, post_as_components
 
 def post(request, post_year, post_month, post_title):
     # Try to find the post that corresponds to the title.
@@ -43,9 +43,12 @@ def post(request, post_year, post_month, post_title):
 
     # Get the information in the form we want. This should be considered
     # subject to change.
-    post_content = found_post.body.split('\n\n')
-    post_title = post_content[0].strip('# ')
-    post_remainder = u'\n\n'.join(post_content[1:])
+    # Begin with the post title and body.
+    post_components = post_as_components(found_post.body)
+    post_title = post_components[0]
+    post_remainder = post_components[2]
+
+    # Other ancillary stuff.
     post_url = get_post_url(found_post)
     page_title = u'Lukasa | ' + post_title
     comments_enabled = found_post.enable_comments
@@ -84,10 +87,9 @@ def home(request):
     # We don't want all of the blog post, just the title and first paragraph.
     # TODO: Should this be more resilient?
     for post in posts:
-        content = post.body.split('\n\n')
-        title = content[0].strip('# ')
+        title, first_para, body = post_as_components(post.body)
         url = get_post_url(post)
-        data_for_output.append( (title, content[1], url) )
+        data_for_output.append( (title, first_para, url) )
 
     # Build up the context again.
     context = RequestContext(request,
@@ -109,8 +111,7 @@ def archive(request):
 
     # Here we only need the titles and the urls.
     for post in posts:
-        content = post.body.split('\n\n')
-        title = content[0].strip('# ')
+        title = post_as_components(post.body)[0]
         url = get_post_url(post)
         data_for_output.append( (title, url) )
 
