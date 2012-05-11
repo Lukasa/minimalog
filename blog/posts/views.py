@@ -47,14 +47,14 @@ def post(request, post_year, post_month, post_title):
     post_title = post_content[0].strip('# ')
     post_remainder = u'\n\n'.join(post_content[1:])
     post_url = get_post_url(found_post)
-    title = u'Lukasa | ' + post_title
+    page_title = u'Lukasa | ' + post_title
 
     # Get all the comments associated with the post.
     comments = Comment.objects.filter(post = found_post).order_by("date")
 
     # Got to build up the relevant contexts.
     context = RequestContext(request,
-            {'PAGE_TITLE': title,
+            {'PAGE_TITLE': page_title,
              'PAGE_DESCRIPTION': None,
              'PAGE_AUTHOR': u'Cory Benfield',
              'post_title': post_title,
@@ -72,7 +72,7 @@ def home(request):
     posts = Post.objects.all().order_by("-publication_date")[:5]
     data_for_output = []
 
-    title = u"Lukasa's BLOGTIEM"
+    post_title = u"Lukasa's BLOGTIEM"
 
     # We don't want all of the blog post, just the title and first paragraph.
     # TODO: Should this be more resilient?
@@ -84,7 +84,7 @@ def home(request):
 
     # Build up the context again.
     context = RequestContext(request,
-              {'PAGE_TITLE': title,
+              {'PAGE_TITLE': post_title,
                'PAGE_DESCRIPTION': u'A blog of technology, programming and life.',
                'PAGE_AUTHOR': u'Cory Benfield',
                'posts': data_for_output})
@@ -98,7 +98,7 @@ def archive(request):
     posts = Post.objects.all().order_by("publication_date")
     data_for_output = []
 
-    title = u"Lukasa | Archive"
+    page_title = u"Lukasa | Archive"
 
     # Here we only need the titles and the urls.
     for post in posts:
@@ -108,7 +108,7 @@ def archive(request):
         data_for_output.append( (title, url) )
 
     context = RequestContext(request,
-              {'PAGE_TITLE': title,
+              {'PAGE_TITLE': page_title,
                'PAGE_DESCRIPTION': u'A list of blog posts.',
                'PAGE_AUTHOR': u'Cory Benfield',
                'posts': data_for_output})
