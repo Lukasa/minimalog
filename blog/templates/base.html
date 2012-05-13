@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="{{ PAGE_DESCRIPTION }}">
     <meta name="author" content="{{ PAGE_AUTHOR }}">
-    <link href="{% url blog_feed %}" rel="alternate" title"{{ PAGE_TITLE }}" type="application/rss+xml">
+    <link href="{% url blog_feed %}" rel="alternate" title"{{ BLOG_FULL_TITLE }}" type="application/rss+xml">
 
     <!-- Stylesheets -->
     <!-- I'm using Skeleton as a base CSS style -->
@@ -30,7 +30,7 @@
     <div class="container">
         <div class="three columns sidebar">
             <nav>
-                <h3 id="logo"><a href="/">BLOGTIEM</a></h3>
+                <h3 id="logo"><a href="{% url blog_home %}">{{ BLOG_SHORT_TITLE }}</a></h3>
                 <ul>
                     <li><a href="{% url blog_home %}">Home</a></li>
                     <li><a href="{% url blog_archive %}">Archive</a></li>
@@ -45,7 +45,7 @@
 
         <div class="twelve columns offset-by-one content">
             <header>
-                <h1><a href="{% url blog_home %}">Lukasa's BLOGTIEM</a></h1>
+                <h1><a href="{% url blog_home %}">{{ BLOG_FULL_TITLE }}</a></h1>
             </header>
 
             <hr class="large" />
@@ -57,7 +57,7 @@
             <hr />
 
             <div class="doc-section" id="attribution">
-                <p class="remove-bottom"><small>Created by Cory Benfield, 2012.<br /><a rel=license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.<small></p>
+                <p class="remove-bottom"><small>{{ BLOG_ATTRIBUTION }}<br /><a rel=license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.<small></p>
             </div>
         </div>
 

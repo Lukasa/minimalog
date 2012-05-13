@@ -4,6 +4,8 @@ from posts.models import Post, Comment
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from forms import CommentForm
 from helpers import get_post_url, post_as_components
+from blog.settings import ( BLOG_PRE_TITLE, BLOG_AUTHOR, BLOG_FULL_TITLE,
+                            BLOG_DESCRIPTION, BLOG_SHORT_TITLE, BLOG_ATTRIBUTION )
 
 def post(request, post_year, post_month, post_title):
     # Try to find the post that corresponds to the title.
@@ -50,7 +52,7 @@ def post(request, post_year, post_month, post_title):
 
     # Other ancillary stuff.
     post_url = get_post_url(found_post)
-    page_title = u'Lukasa | ' + post_title
+    page_title = BLOG_PRE_TITLE + post_title
     comments_enabled = found_post.enable_comments
 
     # Get all the comments associated with the post. Only bother with this if
@@ -64,7 +66,10 @@ def post(request, post_year, post_month, post_title):
     context = RequestContext(request,
             {'PAGE_TITLE': page_title,
              'PAGE_DESCRIPTION': None,
-             'PAGE_AUTHOR': u'Cory Benfield',
+             'PAGE_AUTHOR': BLOG_AUTHOR,
+             'BLOG_SHORT_TITLE': BLOG_SHORT_TITLE,
+             'BLOG_FULL_TITLE': BLOG_FULL_TITLE,
+             'BLOG_ATTRIBUTION': BLOG_ATTRIBUTION,
              'post_title': post_title,
              'post_body': post_remainder,
              'post_url': post_url,
@@ -82,7 +87,7 @@ def home(request):
     posts = Post.objects.all().order_by("-publication_date")[:5]
     data_for_output = []
 
-    post_title = u"Lukasa's BLOGTIEM"
+    post_title = BLOG_FULL_TITLE
 
     # We don't want all of the blog post, just the title and first paragraph.
     # TODO: Should this be more resilient?
@@ -94,8 +99,11 @@ def home(request):
     # Build up the context again.
     context = RequestContext(request,
               {'PAGE_TITLE': post_title,
-               'PAGE_DESCRIPTION': u'A blog of technology, programming and life.',
-               'PAGE_AUTHOR': u'Cory Benfield',
+               'PAGE_DESCRIPTION': BLOG_DESCRIPTION,
+               'PAGE_AUTHOR': BLOG_AUTHOR,
+               'BLOG_SHORT_TITLE': BLOG_SHORT_TITLE,
+               'BLOG_FULL_TITLE': BLOG_FULL_TITLE,
+               'BLOG_ATTRIBUTION': BLOG_ATTRIBUTION,
                'posts': data_for_output})
 
     t = loader.get_template('home.html')
@@ -107,7 +115,7 @@ def archive(request):
     posts = Post.objects.all().order_by("-publication_date")
     data_for_output = []
 
-    page_title = u"Lukasa | Archive"
+    page_title = BLOG_PRE_TITLE + u" Archive"
 
     # Here we only need the titles and the urls.
     for post in posts:
@@ -118,7 +126,10 @@ def archive(request):
     context = RequestContext(request,
               {'PAGE_TITLE': page_title,
                'PAGE_DESCRIPTION': u'A list of blog posts.',
-               'PAGE_AUTHOR': u'Cory Benfield',
+               'PAGE_AUTHOR': BLOG_AUTHOR,
+               'BLOG_SHORT_TITLE': BLOG_SHORT_TITLE,
+               'BLOG_FULL_TITLE': BLOG_FULL_TITLE,
+               'BLOG_ATTRIBUTION': BLOG_ATTRIBUTION,
                'posts': data_for_output})
     t = loader.get_template('archive.html')
 
@@ -127,14 +138,16 @@ def archive(request):
 def about(request):
     # Render the About Me page.
 
-    page_title = u'Lukasa | About Me'
+    page_title = BLOG_PRE_TITLE + u' About Me'
     page_description = u'A brief description of me.'
-    page_author = u'Cory Benfield'
 
     context = RequestContext(request,
               {'PAGE_TITLE': page_title,
                'PAGE_DESCRIPTION': page_description,
-               'PAGE_AUTHOR': page_author})
+               'PAGE_AUTHOR': BLOG_AUTHOR,
+               'BLOG_SHORT_TITLE': BLOG_SHORT_TITLE,
+               'BLOG_FULL_TITLE': BLOG_FULL_TITLE,
+               'BLOG_ATTRIBUTION': BLOG_ATTRIBUTION})
     t = loader.get_template('about.html')
 
     return HttpResponse(t.render(context))
