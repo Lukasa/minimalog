@@ -31,9 +31,9 @@
             <nav>
                 <h3 id="logo"><a href="/">BLOGTIEM</a></h3>
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/archive/">Archive</a></li>
-                    <li><a href="/about/">About Me</a></li>
+                    <li><a href="{% url blog_home %}">Home</a></li>
+                    <li><a href="{% url blog_archive %}">Archive</a></li>
+                    <li><a href="{% url blog_about_me %}">About Me</a></li>
                     <li><a href="https://github.com/Lukasa">My Github</a></li>
                     <li><a href="http://coderwall.com/lukasa">My Coderwall</a></li>
                 </ul>
@@ -43,7 +43,7 @@
 
         <div class="twelve columns offset-by-one content">
             <header>
-                <h1><a href="/">Lukasa's BLOGTIEM</a></h1>
+                <h1><a href="{% url blog_home %}">Lukasa's BLOGTIEM</a></h1>
             </header>
 
             <hr class="large" />

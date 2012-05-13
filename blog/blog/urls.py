@@ -4,12 +4,14 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns('posts.views',
     # Examples:
-    url(r'^$', 'posts.views.home', name='home'),
-    url(r'^blog/(\d{4})/(\d{2})/(\w+)/$', 'posts.views.post', name='blogpost'),
-    url(r'^archive/$', 'posts.views.archive', name='archive'),
-    url(r'^about/$', 'posts.views.about', name='about me'),
+    url(r'^$', 'home', name='blog_home'),
+    url(r'^blog/(?P<post_year>\d{4})/(?P<post_month>\d{2})/(?P<post_title>\w+)/$',
+        'post',
+        name='blog_post'),
+    url(r'^archive/$', 'archive', name='blog_archive'),
+    url(r'^about/$', 'about', name='blog_about_me'),
     # url(r'^blog/', include('blog.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
