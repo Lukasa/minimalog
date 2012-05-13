@@ -7,6 +7,14 @@
 * 7/17/2011
 */
 
+/*
+* Amended by Cory Benfield.
+* Copyright 2012, Cory Benfield.
+* www.lukasa.co.uk
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+*/
+
 
 /* Documentation Styles
 ================================================== */
@@ -65,104 +73,12 @@
 	div.doc-section {
 		margin: 30px 0; }
 
-	#whatAndWhy .row {
-		padding: 30px 0 0; }
-
-	#typography blockquote {
-		margin-top: 20px; }
-
-	.hidden-code a {
-		font-size: 12px;
-		color: #999; }
-	.hidden-code>div {
-		display: none; }
-
-
-	/* Grid */
-	#grid .column,
-	#grid .columns {
-		background: #ddd;
-		height: 25px;
-		line-height: 25px;
-		margin-bottom: 10px;
-		text-align: center;
-		text-transform: uppercase;
-		color: #555;
-		font-size: 12px;
-		font-weight: bold;
-		-moz-border-radius: 2px;
-		 -webkit-border-radius: 2px;
-		 border-radius: 2px; }
-	#grid .column:hover,
-	#grid .columns:hover {
-		background: #bbb;
-		color: #333; }
-	#grid .example-grid { overflow: hidden; }
-
-	.post-button-note,
-	.post-button-note a {
-		font-size: 11px;
-		color: #999; }
-
-	#examples .four.columns a {
-		text-decoration: none;
-	}
-	#examples .four.columns a:hover {
-		text-decoration: underline;
-	}
-
-
-	.resize {
-		position: fixed;
-		bottom: 0;
-		right: 0;
-		height: 80px;
-		width: 80px;
-		background: url(images/resize.png); }
-
-
-	img {
-		max-width: 100%;
-		height: auto; }
-
-	.gist-meta { display: none !important;}
-
-	ul ul ul li { margin-bottom: 3px; }
-
-	.twitter-share-button { margin-bottom: -18px; }
-
-.carbonad,
-.carbonad-image,
-.carbonad-text,
-.carbonad-tag {
-	background: none !important;
-	border: none !important;
-	margin-left: 0 !important;
-}
-.carbonad-tag {
-	margin-top: 6px !important;
-	padding-top: 0 !important;
-}
-.carbonad-text {
-	height: auto !important;
-}
-.carbonad-image {
-	margin-top: 0 !important;
-}
-
-
 	/* Mobile */
 	@media only screen and (max-width: 767px) {
 		header h1 { font-size: 34px; line-height: 37px; }
 		nav { position: relative; }
 		nav ul,
-		.carbonad {
-				display: none;
-		}
 		#logo { text-align: left; }
-		#examples .four.columns {
-			padding-top: 30px;
-		}
 	}
 
 	/* Mobile Landscape */
@@ -207,8 +123,6 @@
 	@media only screen and (min-width: 480px) and (max-width: 767px) and (max-device-width: 1000px) {}
 
 	/* Anything smaller than standard 960 on a device */
-	@media only screen and (max-width: 959px) and (max-device-width: 1000px) {
-		.resize { display: none; }
-	}
+	@media only screen and (max-width: 959px) and (max-device-width: 1000px) {}
 
 
