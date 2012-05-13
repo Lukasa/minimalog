@@ -1,10 +1,14 @@
 from models import Post
+from django.core.urlresolvers import reverse
 
 def get_post_url(post):
     post_year = str(post.publication_date.year)
     post_month = '%02d' % post.publication_date.month
     post_title = post.title
-    url = u'/blog/' + post_year + '/' + post_month + '/' + post_title + '/'
+    #url = u'/blog/' + post_year + '/' + post_month + '/' + post_title + '/'
+    url = reverse('blog_post', kwargs={'post_year': post_year,
+                                       'post_month': post_month,
+                                       'post_title': post_title})
     return url
 
 def post_as_components(post_text):
