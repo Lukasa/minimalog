@@ -4,8 +4,7 @@ from posts.models import Post, Comment
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from forms import CommentForm
 from helpers import get_post_url, post_as_components
-from blog.settings import ( BLOG_PRE_TITLE, BLOG_AUTHOR, BLOG_FULL_TITLE,
-                            BLOG_DESCRIPTION, BLOG_SHORT_TITLE, BLOG_ATTRIBUTION )
+from blog.settings import BLOG_PRE_TITLE, BLOG_FULL_TITLE, BLOG_DESCRIPTION
 
 def post(request, post_year, post_month, post_title):
     # Try to find the post that corresponds to the title.
@@ -66,10 +65,6 @@ def post(request, post_year, post_month, post_title):
     context = RequestContext(request,
             {'PAGE_TITLE': page_title,
              'PAGE_DESCRIPTION': None,
-             'PAGE_AUTHOR': BLOG_AUTHOR,
-             'BLOG_SHORT_TITLE': BLOG_SHORT_TITLE,
-             'BLOG_FULL_TITLE': BLOG_FULL_TITLE,
-             'BLOG_ATTRIBUTION': BLOG_ATTRIBUTION,
              'post_title': post_title,
              'post_body': post_remainder,
              'post_url': post_url,
@@ -100,10 +95,6 @@ def home(request):
     context = RequestContext(request,
               {'PAGE_TITLE': post_title,
                'PAGE_DESCRIPTION': BLOG_DESCRIPTION,
-               'PAGE_AUTHOR': BLOG_AUTHOR,
-               'BLOG_SHORT_TITLE': BLOG_SHORT_TITLE,
-               'BLOG_FULL_TITLE': BLOG_FULL_TITLE,
-               'BLOG_ATTRIBUTION': BLOG_ATTRIBUTION,
                'posts': data_for_output})
 
     t = loader.get_template('home.html')
@@ -126,10 +117,6 @@ def archive(request):
     context = RequestContext(request,
               {'PAGE_TITLE': page_title,
                'PAGE_DESCRIPTION': u'A list of blog posts.',
-               'PAGE_AUTHOR': BLOG_AUTHOR,
-               'BLOG_SHORT_TITLE': BLOG_SHORT_TITLE,
-               'BLOG_FULL_TITLE': BLOG_FULL_TITLE,
-               'BLOG_ATTRIBUTION': BLOG_ATTRIBUTION,
                'posts': data_for_output})
     t = loader.get_template('archive.html')
 
@@ -143,11 +130,7 @@ def about(request):
 
     context = RequestContext(request,
               {'PAGE_TITLE': page_title,
-               'PAGE_DESCRIPTION': page_description,
-               'PAGE_AUTHOR': BLOG_AUTHOR,
-               'BLOG_SHORT_TITLE': BLOG_SHORT_TITLE,
-               'BLOG_FULL_TITLE': BLOG_FULL_TITLE,
-               'BLOG_ATTRIBUTION': BLOG_ATTRIBUTION})
+               'PAGE_DESCRIPTION': page_description})
     t = loader.get_template('about.html')
 
     return HttpResponse(t.render(context))

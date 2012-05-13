@@ -1,5 +1,7 @@
 from models import Post
 from django.core.urlresolvers import reverse
+from blog.settings import ( BLOG_AUTHOR, BLOG_FULL_TITLE,
+                            BLOG_SHORT_TITLE, BLOG_ATTRIBUTION )
 
 def get_post_url(post):
     post_year = str(post.publication_date.year)
@@ -23,4 +25,14 @@ def post_as_components(post_text):
     first_para = post_content[1]
     body = u'\n\n'.join(post_content[1:])
     return (title, first_para, body)
+
+def blogcontext(request):
+    '''This function acts as a Django context processor that injects some of
+    the globals we want into the templates. It takes a request, but does
+    nothing with it.'''
+    context_dict = {'PAGE_AUTHOR': BLOG_AUTHOR,
+                    'BLOG_SHORT_TITLE': BLOG_SHORT_TITLE,
+                    'BLOG_FULL_TITLE': BLOG_FULL_TITLE,
+                    'BLOG_ATTRIBUTION': BLOG_ATTRIBUTION}
+    return context_dict
 

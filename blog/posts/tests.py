@@ -1,6 +1,6 @@
 # coding=utf-8
 from django.test import TestCase
-from posts.helpers import get_post_url, post_as_components
+from posts.helpers import get_post_url, post_as_components, blogcontext
 from posts.models import Post, Comment
 from django.core.urlresolvers import reverse
 
@@ -245,4 +245,18 @@ This is the second paragraph.'''
         self.assertEqual(first_para, 'This is the first paragraph.')
         self.assertEqual(body, 'This is the first paragraph.\n\n' +
                                'This is the second paragraph.')
+
+    def test_blogcontext_returns_dict(self):
+        output = blogcontext(object())
+
+        self.assertTrue(isinstance(output, dict))
+
+    def test_blogcontext_supplies_expected_variables(self):
+        output = blogcontext(object())
+
+        self.assertTrue(output['PAGE_AUTHOR'])
+        self.assertTrue(output['BLOG_SHORT_TITLE'])
+        self.assertTrue(output['BLOG_FULL_TITLE'])
+        self.assertTrue(output['BLOG_ATTRIBUTION'])
+        self.assertEqual(len(output), 4)
 
