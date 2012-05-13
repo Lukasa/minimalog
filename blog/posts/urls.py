@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from posts.feeds import LatestEntries
 
 urlpatterns = patterns('posts.views',
     url(r'^$', 'home', name='blog_home'),
@@ -7,4 +8,5 @@ urlpatterns = patterns('posts.views',
         name='blog_post'),
     url(r'^archive/$', 'archive', name='blog_archive'),
     url(r'^about/$', 'about', name='blog_about_me'),
+    url(r'^rss/$', LatestEntries(), name='blog_feed'),
 )

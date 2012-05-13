@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="{{ PAGE_DESCRIPTION }}">
     <meta name="author" content="{{ PAGE_AUTHOR }}">
+    <link href="{% url blog_feed %}" rel="alternate" title"{{ PAGE_TITLE }}" type="application/rss+xml">
 
     <!-- Stylesheets -->
     <!-- I'm using Skeleton as a base CSS style -->
@@ -34,6 +35,7 @@
                     <li><a href="{% url blog_home %}">Home</a></li>
                     <li><a href="{% url blog_archive %}">Archive</a></li>
                     <li><a href="{% url blog_about_me %}">About Me</a></li>
+                    <li><a href="{% url blog_feed %}">RSS Feed</a></li>
                     <li><a href="https://github.com/Lukasa">My Github</a></li>
                     <li><a href="http://coderwall.com/lukasa">My Coderwall</a></li>
                 </ul>
