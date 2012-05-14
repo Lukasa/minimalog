@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block content %}
+<ul>
+{% for post_title, post_url in posts %}
+    <li><a href={{ post_url }}><strong>{{ post_title }}</strong></a></li>
+{% endfor %}
+</ul>
+{% endblock %}

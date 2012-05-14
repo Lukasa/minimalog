@@ -1,0 +1,66 @@
+{% load markup %}
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7]<html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8]<html class="ie ie7" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--[endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <title>{{ PAGE_TITLE }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="{{ PAGE_DESCRIPTION }}">
+    <meta name="author" content="{{ PAGE_AUTHOR }}">
+    <link href="{% url blog_feed %}" rel="alternate" title"{{ BLOG_FULL_TITLE }}" type="application/rss+xml">
+
+    <!-- Stylesheets -->
+    <!-- I'm using Skeleton as a base CSS style -->
+    <link href="{{ STATIC_URL }}css/base.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/layout.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/skeleton.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/docs.css" rel="stylesheet">
+
+    <!-- IE is stupid, and you're stupid if you use it. -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="container">
+        <div class="three columns sidebar">
+            <nav>
+                <h3 id="logo"><a href="{% url blog_home %}">{{ BLOG_SHORT_TITLE }}</a></h3>
+                <ul>
+                    <li><a href="{% url blog_home %}">Home</a></li>
+                    <li><a href="{% url blog_archive %}">Archive</a></li>
+                    <li><a href="{% url blog_about_me %}">About Me</a></li>
+                    <li><a href="{% url blog_feed %}">RSS Feed</a></li>
+                    <li><a href="https://github.com/Lukasa">My Github</a></li>
+                    <li><a href="http://coderwall.com/lukasa">My Coderwall</a></li>
+                </ul>
+            </nav>
+            &nbsp;
+        </div>
+
+        <div class="twelve columns offset-by-one content">
+            <header>
+                <h1><a href="{% url blog_home %}">{{ BLOG_FULL_TITLE }}</a></h1>
+            </header>
+
+            <hr class="large" />
+
+            <div class="doc-section">
+                {% block content %}{% endblock %}
+            </div>
+
+            <hr />
+
+            <div class="doc-section" id="attribution">
+                <p class="remove-bottom"><small>{{ BLOG_ATTRIBUTION }}<br /><a rel=license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.<small></p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block content %}
+    <h2><a href={{ post_url }}>{{ post_title }}</a></h2>
+    <p><small>Posted on {{ publication_date|date:"d/m/Y"}}.</small></p>
+    {{ post_body|markdown }}
+
+    {% if comments_enabled %}
+        <div class="comments">
+            {% if comments %}
+                <h4>{{ comments|length }} Comments</h4>
+                {% for comment in comments %}
+                    <div class="comment-body">
+                    <p>{{ comment.text|escape }}</p>
+                    <p><span style="margin-left:20px;">{{ comment.author|escape }} at {{ comment.date|date:"g:i A" }} on {{ comment.date|date:"l, F" }} the {{ comment.date|date:"jS, Y" }}</span></p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h4>No Comments. Be the first!</h4>
+            {% endif %}
+        </div>
+
+        <strong>New Comment:</strong>
+        <form action={{ post_url }} method="post">{% csrf_token %}
+            {{ form.non_field_errors }}
+            {{ form.name.errors }}
+            <label for="id_name">Display Name:</label>
+            {{ form.name }}
+            {{ form.text.errors }}
+            <label for="id_text">Comment:</label>
+            {{ form.text }}
+            <button type="submit">Submit Comment</button>
+        </form>
+    {% else %}
+        <div class-"comments">
+            <h4>Comments have been disabled on this post.</h4>
+        </div>
+    {% endif %}
+{% endblock %}
