@@ -36,8 +36,21 @@
                     <li><a href="{% url blog_archive %}">Archive</a></li>
                     <li><a href="{% url blog_about_me %}">About Me</a></li>
                     <li><a href="{% url blog_feed %}">RSS Feed</a></li>
-                    <li><a href="https://github.com/Lukasa">My Github</a></li>
-                    <li><a href="http://coderwall.com/lukasa">My Coderwall</a></li>
+                    {% if GPLUS_LINK %}
+                    <li><a href="{{ GPLUS_LINK }}">My Google+</a></li>
+                    {% endif %}
+                    {% if LINKEDIN_LINK %}
+                    <li><a href="{{ LINKEDIN_LINK }}">My LinkedIn</a></li>
+                    {% endif %}
+                    {% if TWITTER_LINK %}
+                    <li><a href="{{ TWITTER_LINK }}">My Twitter</a></li>
+                    {% endif %}
+                    {% if GITHUB_LINK %}
+                    <li><a href="{{ GITHUB_LINK }}">My Github</a></li>
+                    {% endif %}
+                    {% if CODERWALL_LINK %}
+                    <li><a href="{{ CODERWALL_LINK }}">My Coderwall</a></li>
+                    {% endif %}
                 </ul>
             </nav>
             &nbsp;

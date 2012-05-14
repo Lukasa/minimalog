@@ -258,5 +258,5 @@ This is the second paragraph.'''
         self.assertTrue(output['BLOG_SHORT_TITLE'])
         self.assertTrue(output['BLOG_FULL_TITLE'])
         self.assertTrue(output['BLOG_ATTRIBUTION'])
-        self.assertEqual(len(output), 4)
+        self.assertEqual(len(output), 9)
 

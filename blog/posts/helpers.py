@@ -1,7 +1,9 @@
 from models import Post
 from django.core.urlresolvers import reverse
 from blog.settings import ( BLOG_AUTHOR, BLOG_FULL_TITLE,
-                            BLOG_SHORT_TITLE, BLOG_ATTRIBUTION )
+                            BLOG_SHORT_TITLE, BLOG_ATTRIBUTION, GPLUS_LINK,
+                            LINKEDIN_LINK, TWITTER_LINK, GITHUB_LINK,
+                            CODERWALL_LINK )
 
 def get_post_url(post):
     post_year = str(post.publication_date.year)
@@ -33,6 +35,11 @@ def blogcontext(request):
     context_dict = {'PAGE_AUTHOR': BLOG_AUTHOR,
                     'BLOG_SHORT_TITLE': BLOG_SHORT_TITLE,
                     'BLOG_FULL_TITLE': BLOG_FULL_TITLE,
-                    'BLOG_ATTRIBUTION': BLOG_ATTRIBUTION}
+                    'BLOG_ATTRIBUTION': BLOG_ATTRIBUTION,
+                    'GPLUS_LINK': GPLUS_LINK,
+                    'LINKEDIN_LINK': LINKEDIN_LINK,
+                    'TWITTER_LINK': TWITTER_LINK,
+                    'GITHUB_LINK': GITHUB_LINK,
+                    'CODERWALL_LINK': CODERWALL_LINK}
     return context_dict
 
