@@ -60,8 +60,9 @@ hosted separately (e.g. in AWS). This should keep the blog fast.
 
 ## I'm sold. How do I use it?
 
-
 It's not all that hard. To get hold of the software, clone this repository.
+Then, make sure you have all the packages installed, by running:
+`pip install -r requirements.txt`.
 Next, make sure you have an Amazon S3 account, and an empty S3 bucket.
 Then, you need to make the following changes. First, replace the `about.html`
 template with something that suits you better. Then, create a file called
