@@ -60,7 +60,71 @@ hosted separately (e.g. in AWS). This should keep the blog fast.
 
 ## I'm sold. How do I use it?
 
-To come.
+
+It's not all that hard. To get hold of the software, clone this repository.
+Next, make sure you have an Amazon S3 account, and an empty S3 bucket.
+Then, you need to make the following changes. First, replace the `about.html`
+template with something that suits you better. Then, create a file called
+`personal_settings.py` in the same directory as the already-existing
+`settings.py` file. In this file, define some constants.
+
+First, define the ones that are traditionally in the Django `settings.py`
+file:
+
+* __DEBUG__. `True` if you are in production, `False` for testing.
+* __TEMPLATE\_DEBUG__. I set this equal to __DEBUG__.
+* __DATABASES__. This depends on what database you're using. To see the
+  correct format, look at the Django docs.
+* __STATIC\_URL__. The URL to the S3 bucket you're storing your static
+  files.
+* __AWS\_STORAGE\_BUCKET\_NAME__. The name of the S3 bucket you're storing
+  your static files in.
+* __SECRET\_KEY__. This should be a random string used as a seed for the
+  Django random number generator.
+
+Next, define the compulsory ones for Minimalog:
+
+* __BLOG\_AUTHOR__. The name of the person authoring the blog.
+* __BLOG\_FULL\_TITLE__. The full-length title of the blog, e.g. 'My
+  superawesome blog!'
+* __BLOG\_SHORT\_TITLE__. A short-form version of the blog title, e.g
+  'Superblog'.
+* __BLOG\_PRE\_TITLE__. A string that will be placed before the titles of
+  some of the pages, e.g. 'Superblog | '.
+* __BLOG\_ATTRIBUTION__. The string you want to use as the attribution, e.g.
+  'Created by Barney the Purple Dinosaur, 2052.'
+* __BLOG\_DESCRIPTION__. A short string describing your blog for Google.
+
+In the same file, the following must be defined, but can be empty strings if
+you don't have or want to use any of them:
+
+* __GITHUB\_LINK__. A link to your GitHub page.
+* __CODERWALL\_LINK__. A link to your Coderwall.
+* __GPLUS\_LINK__. A link to your Google+ Profile.
+* __LINKEDIN\_LINK__. A link to your LinkedIn profile.
+* __TWITTER\_LINK__. A link to your Twitter profile.
+
+Finally, define two environment variables in your shell:
+
+* __S3\_KEY__. Your Amazon S3 key.
+* __S£\_SECRET\_KEY__. Your Amazon S3 secret key.
+
+With those defined, you should be ready to go! Make sure that all of the tests
+run, by running `python manage.py test posts`, and ensuring they pass.
+
+Then, upload all the static files you need to your S3 bucket, by running
+`python manage.py collectstatic`. With that done, you should be ready to go!
+
+## Uh, how do I get my blog posts into the database?
+
+Depends. If you have access to the Django shell, you can import the Post model
+and add them by hand. If not, I have provided a Django command that takes the
+URL of a raw Markdown document and adds it to the DB. To run it, run:
+`python manage.py addpost <post_url>`.
+
+As an example, you can store your blog posts on Github. If you do so, and you
+want to add them to the DB, you __must__ use the link to the __raw__ version
+of the file.
 
 ## What about the license?
 
