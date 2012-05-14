@@ -57,6 +57,11 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+# Local static file locations.
+STATICFILES_DIRS = (
+    os.path.join(SITE_ROOT, '..', 'static'),
+)
+
 # Required info for S3 storage.
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_ACCESS_KEY_ID = os.environ['S3_KEY']
