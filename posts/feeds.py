@@ -1,7 +1,7 @@
 from django.contrib.syndication.views import Feed
 from posts.models import Post
 from helpers import get_post_url, post_as_components
-from settings import BLOG_FULL_TITLE, BLOG_DESCRIPTION
+from blog.settings import BLOG_FULL_TITLE, BLOG_DESCRIPTION
 import markdown
 
 class LatestEntries(Feed):
