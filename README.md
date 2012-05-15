@@ -72,7 +72,7 @@ template with something that suits you better. Then, create a file called
 First, define the ones that are traditionally in the Django `settings.py`
 file:
 
-* __DEBUG__. `True` if you are in production, `False` for testing.
+* __DEBUG__. `False` if you are in production, `True` for testing.
 * __TEMPLATE\_DEBUG__. I set this equal to __DEBUG__.
 * __DATABASES__. This depends on what database you're using. To see the
   correct format, look at the Django docs.
