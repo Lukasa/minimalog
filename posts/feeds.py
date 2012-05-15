@@ -1,12 +1,13 @@
 from django.contrib.syndication.views import Feed
 from posts.models import Post
 from helpers import get_post_url, post_as_components
+from settings import BLOG_FULL_TITLE, BLOG_DESCRIPTION
 import markdown
 
 class LatestEntries(Feed):
-    title = u"Lukasa's BLOGTIEM Recent Posts"
+    title = BLOG_FULL_TITLE
     link = '/'
-    description = u"Lukasa's blog of tech."
+    description = BLOG_DESCRIPTION
 
     def items(self):
         return Post.objects.order_by("-publication_date")[:10]
