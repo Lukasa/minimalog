@@ -108,7 +108,7 @@ automatically added to your sidebar.
 Finally, define two environment variables in your shell:
 
 * __S3\_KEY__. Your Amazon S3 key.
-* __S£\_SECRET\_KEY__. Your Amazon S3 secret key.
+* __S3\_SECRET\_KEY__. Your Amazon S3 secret key.
 
 With those defined, you should be ready to go! Make sure that all of the tests
 run, by running `python manage.py test posts`, and ensuring they pass.
