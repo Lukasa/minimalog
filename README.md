@@ -96,8 +96,8 @@ Next, define the compulsory ones for Minimalog:
   'Created by Barney the Purple Dinosaur, 2052.'
 * __BLOG\_DESCRIPTION__. A short string describing your blog for Google.
 
-In the same file, the following must be defined, but can be empty strings if
-you don't have or want to use any of them:
+In the same file, you may define any of the following. They will be
+automatically added to your sidebar.
 
 * __GITHUB\_LINK__. A link to your GitHub page.
 * __CODERWALL\_LINK__. A link to your Coderwall.
