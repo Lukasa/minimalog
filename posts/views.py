@@ -79,7 +79,7 @@ def post(request, post_year, post_month, post_title):
 
 def home(request):
     # Here we want to show the most recent posts.
-    posts = Post.objects.all().order_by("-publication_date")[:5]
+    posts = Post.objects.order_by("-publication_date")[:5]
     data_for_output = []
 
     post_title = BLOG_FULL_TITLE
@@ -103,7 +103,7 @@ def home(request):
 
 def archive(request):
     # Here we want to show all of the post titles, sorted by date.
-    posts = Post.objects.all().order_by("-publication_date")
+    posts = Post.objects.order_by("-publication_date").all()
     data_for_output = []
 
     page_title = BLOG_PRE_TITLE + u" Archive"
