@@ -32,7 +32,8 @@
         div.container {
 		padding-top: 60px; }
 
-        pre {
+        code,
+        pre code {
                 font-family: "Courier New", "Courier", monospace }
 
 	/* Doc nav */
