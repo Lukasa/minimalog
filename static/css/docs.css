@@ -77,26 +77,14 @@
 	/* Mobile */
 	@media only screen and (max-width: 767px) {
 		header h1 { font-size: 34px; line-height: 37px; }
-		nav { position: relative; }
-		nav ul,
-		#logo { text-align: left; }
+		nav { display: none }
 	}
 
 	/* Mobile Landscape */
-	@media only screen and (min-width: 480px) and (max-width: 767px) {
-		nav ul {
-			display: none;
-		}
-	}
+	@media only screen and (min-width: 480px) and (max-width: 767px) { }
 
 	/* Non 960 */
-	@media only screen and (max-width: 959px) {
-		#logo {
-			font-size: 21px;
-			margin-bottom: 15px; }
-		nav .button {
-			padding: 9px 20px 11px; }
-	}
+	@media only screen and (max-width: 959px) { }
 
 	/* iPad Portrait/Browser */
 	@media only screen and (min-width: 768px) and (max-width: 959px) {
