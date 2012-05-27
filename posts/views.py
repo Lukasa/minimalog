@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext, loader
-from posts.models import Post, Comment
+from posts.models import Post
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from forms import CommentForm
 from helpers import get_post_url, post_as_components
@@ -21,27 +21,6 @@ def post(request, post_year, post_month, post_title):
     else:
         raise Http404
 
-    # If this is hit by a POST, someone is making a comment.
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-
-        # Check form validity. If not valid, we'll drop through and render the
-        # page.
-        if form.is_valid():
-            # Hooray, form is filled out ok! Create a new comment.
-            body_text = form.cleaned_data['text']
-            comment_author = form.cleaned_data['name']
-
-            comment = Comment(text   = body_text,
-                              author = comment_author,
-                              post   = found_post)
-            comment.save()
-            # At this point, we're happy to drop through and render the page.
-            return HttpResponseRedirect(request.path)
-    else:
-        # Return an empty form and render the page.
-        form = CommentForm()
-
     # Get the information in the form we want. This should be considered
     # subject to change.
     # Begin with the post title and body.
@@ -54,13 +33,6 @@ def post(request, post_year, post_month, post_title):
     page_title = BLOG_PRE_TITLE + post_title
     comments_enabled = found_post.enable_comments
 
-    # Get all the comments associated with the post. Only bother with this if
-    # the comments are enabled on the post.
-    if comments_enabled:
-        comments = Comment.objects.filter(post = found_post).order_by("date")
-    else:
-        comments = []
-
     # Got to build up the relevant contexts.
     context = RequestContext(request,
             {'PAGE_TITLE': page_title,
@@ -69,9 +41,7 @@ def post(request, post_year, post_month, post_title):
              'post_body': post_remainder,
              'post_url': post_url,
              'comments_enabled': comments_enabled,
-             'comments': comments,
-             'publication_date': found_post.publication_date,
-             'form': form})
+             'publication_date': found_post.publication_date})
 
     t = loader.get_template('post.html')
 

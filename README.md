@@ -9,8 +9,8 @@ does not have those things.
 Do you want a nice web-based UI for writing your posts, with WYSIWYG editing?
 Minimalog doesn't have that.
 
-Do you want nice comment filtering so you don't have to worry about spam?
-Minimalog doesn't have that either.
+Do you want to have multiple users contribute to your blog separately, without
+requiring full-blown admin access? Minimalog doesn't do that.
 
 Do you want it to play the bassoon? Minimalog doesn't do that, but to be fair
 I don't think Wordpress does either. Certainly not without a plugin.
@@ -40,15 +40,22 @@ off-site (e.g. on GitHub) into the blog proper. This script will need to be
 called from the command line (or the Heroku toolbelt), and you will be
 expected to be comfortable with editing plain text files for config.
 
+## What resources does Minimalog use?
+
+Minimalog expects you to host static files on
+[Amazon S3](http://aws.amazon.com/s3/). The comments functionality is provided
+by [Disqus](http://disqus.com/). You **will need** accounts for both services
+to use Minimalog.
+
 ## Advantages
 
-* __Secure__. There are no logins or login options available for either
-administrators or commenters, so there is nothing to be abused. No input from
-commenters is trusted, and the ORM should limit the exposure to SQL injection.
+* __Secure__. There are no logins or login options available for
+administrators, so there is nothing to be abused.
 
 * __Anonymous__. As noted above, Minimalog does not provide accounts for
-posters, administrators or commenters. Additionally, no analytics are provided
-in the default configuration. Minimalog does not keep track of anyone.
+posters or administrators. Additionally, no analytics are provided
+in the default configuration. Minimalog does not keep track of anyone. S3 and
+Disqus, however, may.
 
 * __Lightweight__. Because of its limited functionality, Minimalog is small.
 Aside from translating posts out of Markdown format, Minimalog does almost
@@ -95,6 +102,11 @@ Next, define the compulsory ones for Minimalog:
 * __BLOG\_ATTRIBUTION__. The string you want to use as the attribution, e.g.
   'Created by Barney the Purple Dinosaur, 2052.'
 * __BLOG\_DESCRIPTION__. A short string describing your blog for Google.
+
+Next, provide the information you need in order to use Disqus:
+
+* __DISQUS\_SHORTNAME__. The shortname of your Disqus forum. If you need help
+  finding this information, see [here](http://docs.disqus.com/help/68/).
 
 In the same file, you may define any of the following. They will be
 automatically added to your sidebar.

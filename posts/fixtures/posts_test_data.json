@@ -28,25 +28,5 @@
             "enable_comments": true, 
             "title": "3_Building_A_Blog_Part_3"
         }
-    }, 
-    {
-        "pk": 1, 
-        "model": "posts.comment", 
-        "fields": {
-            "date": "2012-05-11T18:12:21.580Z", 
-            "text": "Test comment, right here.", 
-            "post": 3, 
-            "author": "Lukasa"
-        }
-    }, 
-    {
-        "pk": 2, 
-        "model": "posts.comment", 
-        "fields": {
-            "date": "2012-05-11T18:12:49.176Z", 
-            "text": "This is also a test comment.", 
-            "post": 2, 
-            "author": "Steve"
-        }
     }
 ]
