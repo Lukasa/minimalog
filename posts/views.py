@@ -2,7 +2,6 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext, loader
 from posts.models import Post
 from django.http import Http404, HttpResponse, HttpResponseRedirect
-from forms import CommentForm
 from helpers import get_post_url, post_as_components
 from blog.settings import BLOG_PRE_TITLE, BLOG_FULL_TITLE, BLOG_DESCRIPTION
 
